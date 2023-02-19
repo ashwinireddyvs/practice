@@ -2,15 +2,19 @@ package com.example.demo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class BinaryTreeDemo2 {
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
+
+public class Sample {
 
 	public static void main(String[] args) {
 		List<User> ls=new ArrayList<User>();
@@ -21,10 +25,13 @@ public class BinaryTreeDemo2 {
 		
 		
 		Predicate<? super User> userPre=u->u.age<=10;
-		ls.stream()
+		List<User> l = ls.stream()
 			.filter(userPre)
-			.sorted(Comparator.comparingInt(User::getAge).reversed())
-			.forEach(System.out::println);
+			.sorted(Comparator.comparing(User::getAge).reversed())
+			.collect(Collectors.toList());//for printing in reverse order use list
+			//.forEach(System.out::println);
+		
+		System.out.println(l);
 		
 		
 		String n="ashwini";
@@ -35,6 +42,15 @@ public class BinaryTreeDemo2 {
 		
 		String st = s.stream().map(u->u.toString()).collect(Collectors.joining(" "));
 		System.out.println(st);
+		
+		
+		Map<User,String> m = new HashMap<User,String>(3);
+		m.put(new User("aaaa",13),"aaa");
+		m.put(new User("aaaa",12),"bbb");
+		m.put(new User("aaa24a",11),"ccc");
+		m.put(new User("aa1aa",10),"ddd");
+		
+		System.out.println(m);
 		
 		
 	}
@@ -74,6 +90,24 @@ class User {
 	public String toString() {
 		return "User [name=" + name + ", age=" + age + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return 	age;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return age == other.age && Objects.equals(name, other.name);
+	}
+	
 	
 	
 }
