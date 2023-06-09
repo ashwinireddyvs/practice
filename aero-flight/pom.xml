@@ -8,7 +8,7 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.smart4aviation.aero</groupId>
+	<groupId>com.smart4aviation</groupId>
 	<artifactId>aero-flight</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>aero-flight</name>
