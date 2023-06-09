@@ -104,8 +104,8 @@ class BinarySearchTree {
 	public void readPostOrder(Node node) {
 		// TODO Auto-generated method stub
 		if(node!=null) {
-			readInoder(node.left);
-			readInoder(node.right);
+			readPostOrder(node.left);
+			readPostOrder(node.right);
 			System.out.println(node.data);
 		
 		}

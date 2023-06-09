@@ -1,8 +1,11 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,24 +17,48 @@ import java.util.stream.Collectors;
 
 import org.springframework.boot.origin.SystemEnvironmentOrigin;
 
-public class Sample {
+public class Sample extends Thread{
 
+	
 	public static void main(String[] args) {
+		
+		
+		
 		List<User> ls=new ArrayList<User>();
 		ls.add(new User("aaaa",1));
 		ls.add(new User("aaaa12",12));
 		ls.add(new User("aaaa10",10));
 		ls.add(new User("aaaa5",5));
 		
+		List<User> ls1=new ArrayList<User>();
+		ls1.add(new User("aaaa",1));
+		ls1.add(new User("aaaa12",12));
+		
+		List<List<User>> lls=new ArrayList<>();
+		lls.add(ls);
+		lls.add(ls1);
+		System.out.println(
+				 lls.stream()
+				.flatMap(List::stream)
+				.map(a -> a.getName()+" "+a.getAge())
+				.collect(Collectors.toList()));
+		
+		
 		
 		Predicate<? super User> userPre=u->u.age<=10;
 		List<User> l = ls.stream()
 			.filter(userPre)
 			.sorted(Comparator.comparing(User::getAge).reversed())
-			.collect(Collectors.toList());//for printing in reverse order use list
+			.toList();
+			//.collect(Collectors.toList());//for printing in reverse order use list
 			//.forEach(System.out::println);
 		
-		System.out.println(l);
+		
+		System.out.println("Max age ==> "+ls.stream().max(Comparator.comparing(User::getAge)));
+		System.out.println("Min age ==> "+ls.stream().min(Comparator.comparing(User::getAge)));
+		
+		IntSummaryStatistics summaryStatistics = ls.stream().mapToInt(User::getAge).summaryStatistics();
+		System.out.println(summaryStatistics.getAverage());
 		
 		
 		String n="ashwini";
@@ -51,6 +78,12 @@ public class Sample {
 		m.put(new User("aa1aa",10),"ddd");
 		
 		System.out.println(m);
+		
+		String sample = "MADAM";
+		if(sample.equals(new StringBuilder(sample).reverse().toString()))
+			System.out.println("Palindrome");
+		else 
+			System.out.println("Not Palindrome");
 		
 		
 	}
@@ -111,4 +144,6 @@ class User {
 	
 	
 }
+
+
 
