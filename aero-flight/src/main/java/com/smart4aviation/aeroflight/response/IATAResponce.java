@@ -1,7 +1,5 @@
 package com.smart4aviation.aeroflight.response;
 
-import java.math.BigDecimal;
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;

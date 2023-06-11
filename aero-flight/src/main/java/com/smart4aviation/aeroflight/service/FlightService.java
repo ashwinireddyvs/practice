@@ -1,6 +1,5 @@
 package com.smart4aviation.aeroflight.service;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Component;
@@ -9,7 +8,6 @@ import com.smart4aviation.aeroflight.enity.Flight;
 import com.smart4aviation.aeroflight.response.FlightWeight;
 import com.smart4aviation.aeroflight.response.IATAResponce;
 
-@Component
 public interface FlightService {
 
 	

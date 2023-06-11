@@ -1,14 +1,8 @@
 package com.smart4aviation.aeroflight.enity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
