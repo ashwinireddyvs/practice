@@ -72,6 +72,29 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			 <plugin>
+			   <groupId>org.openapitools</groupId>
+			   <artifactId>openapi-generator-maven-plugin</artifactId>
+			   <version>4.3.1</version>
+			   <executions>
+			      <execution>
+			         <goals>
+			            <goal>generate</goal>
+			         </goals>
+			         <configuration>
+			            <inputSpec>
+			               ${project.basedir}/src/main/resources/openapi/specs/flight.yaml
+			            </inputSpec>
+			            <generatorName>spring</generatorName>
+			            <apiPackage>sk.matusko.tutorial.openapicustomvalidations.api</apiPackage>
+			            <modelPackage>sk.matusko.tutorial.openapicustomvalidations.model</modelPackage>
+			            <configOptions>
+			               <interfaceOnly>true</interfaceOnly>
+			            </configOptions>
+			         </configuration>
+			      </execution>
+			   </executions>
+			</plugin>
 		</plugins>
 	</build>
 

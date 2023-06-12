@@ -17,6 +17,9 @@ import com.smart4aviation.aeroflight.response.FlightWeight;
 import com.smart4aviation.aeroflight.response.IATAResponce;
 import com.smart4aviation.aeroflight.service.FlightService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -30,6 +33,7 @@ import lombok.extern.log4j.Log4j2;
 
 @RestController
 @Log4j2
+@Tag(name = "Flight", description = "Everything about Flights")
 public class FlightController {
 		
 	@Autowired
@@ -51,8 +55,12 @@ public class FlightController {
 	 * b. Baggage Weight for requested Flight 
 	 * c. Total Weight for requested Flight
 	 */
+	@Operation(summary = "Get Flight weight details", description = "Fetch Flight weight details using flight Number and date")
 	@GetMapping("/flight/{flightNumber}")
-	public FlightWeight retrieveFlightWeight(@RequestParam OffsetDateTime departureDate,
+	public FlightWeight retrieveFlightWeight(
+			@Parameter(description = "Fight Departure DateTime Eg. 2018-12-17T09:05:51-01:00")
+			@RequestParam("Departure DateTime(yyyy-MM-dd'T'HH:mm:ss.SSSXXX)") OffsetDateTime departureDate,
+			@Parameter(description = "Fight Number Eg. 8703")
 			@PathVariable Integer flightNumber) {
 		log.info("Inside retrieveFlightWeight method");
 		return flightService.retrieveFlightIdByNoNDate(flightNumber,departureDate);
@@ -66,9 +74,13 @@ public class FlightController {
 	 * c. Total number (pieces) of baggage arriving to this airport, 
 	 * d. Total number (pieces) of baggage departing from this airport.
 	 */
+	@Operation(summary = "Get Aorport details", description = "Fetch Airport details using airport IATA code and date")
 	@GetMapping("/flight/ita")
-	public IATAResponce retrieveITADetails(@RequestParam OffsetDateTime departureDate,
-			@RequestParam String iataCode) {
+	public IATAResponce retrieveITADetails(
+			@Parameter(description = "Airport details at specific DateTime Eg. 2018-12-17T09:05:51-01:00")
+			@RequestParam("DateTime(yyyy-MM-dd'T'HH:mm:ss.SSSXXX)") OffsetDateTime departureDate,
+			@Parameter(description = "IATA code Eg. YYT")
+			@RequestParam("IATA code") String iataCode) {
 		log.info("Inside retrieveITADetails method");
 				return flightService.retrieveIATADetailsByITACodeNDate(iataCode,departureDate);
 		
